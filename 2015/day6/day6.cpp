@@ -1,56 +1,48 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+
 using namespace std;
 
 int main() {
-    int a = 1000, b = 1000, c = 5, d = 2;
-    int array[a][b][c][d] = {0};
-    for (int i = 0; i < a; i++) {
-        for (int j = 0; j < b; j++) {
-            for (int k = 0; k < c; k++) {
-                switch (k) {
-                    case 0:
-                        array[i][j][k][0] = i;
-                        array[i][j][k][1] = j;
-                        break;
-                    case 1:
-                        array[i][j][k][0] = i;
-                        array[i][j][k][1] = 9 - j;
-                        break;
-                    case 2:
-                        array[i][j][k][0] = 9 - i;
-                        array[i][j][k][1] = j;
-                        break;
-                    case 3:
-                        array[i][j][k][0] = 9 - i;
-                        array[i][j][k][1] = 9 - j;
-                        break;
-                    default:
-                        break;
+    const int gridSize = 1000;
+    vector<int> lights(gridSize * gridSize, 0);  // Initialize all lights to off
+
+    ifstream inputFile("instructions.txt");  // Replace "instructions.txt" with your input file name
+    string line;
+
+    while (getline(inputFile, line)) {
+        stringstream ss(line);
+        string command;
+        ss >> command;
+
+        int x1, y1, x2, y2;
+        char dummy; // To handle "through" keyword
+        ss >> x1 >> y1 >> dummy >> x2 >> y2;
+
+        for (int i = x1; i <= x2; ++i) {
+            for (int j = y1; j <= y2; ++j) {
+                int index = i * gridSize + j;
+                if (command == "toggle") {
+                    lights[index] = 1 - lights[index]; // Toggle the lights
+                } else if (command == "on") {
+                    lights[index] = 1; // Turn on the lights
+                } else if (command == "off") {
+                    lights[index] = 0; // Turn off the lights
                 }
             }
         }
     }
-    for (int i = 0; i < a; i++) {
-        for (int j = 0; j < b; j++) {
-            cout << "[";
-            for (int k = 0; k < c; k++) {
-                for (int l = 0; l < d; l++) {
-                    if (l == 0) {
-                        cout << "[" << array[i][j][k][l] << ",";
-                    } else if (l == 1) {
-                        cout << array[i][j][k][l] << "]";
-                    }
-                }
-                if (k != c - 1) {
-                    cout << "] , ";
-                } else if (k == c - 1) {
-                    cout << "]";
-                }
-            }
-            cout << "] ";
-        }
-        cout << endl;
+
+    // Count the number of lit lights
+    int litCount = 0;
+    for (int light : lights) {
+        litCount += light;
     }
+
+    cout << "Number of lit lights: " << litCount << endl;
 
     return 0;
 }
