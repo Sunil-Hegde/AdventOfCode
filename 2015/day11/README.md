@@ -31,9 +31,3 @@ Your puzzle answer was `hepxxyzz`.
 Santa's password expired again. What's the next one?
 
 Your puzzle answer was `heqaabcc`.
-
-Both parts of this puzzle are complete! They provide two gold stars: **
-
-At this point, you should [return to your Advent calendar](https://adventofcode.com/2015) and try another puzzle.
-
-Your puzzle input was `hepxcrrq`.
