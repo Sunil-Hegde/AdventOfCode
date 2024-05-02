@@ -19,6 +19,7 @@ def calculate_total_distance(routes, permutation):
             total_distance += route[2]  
 
     return total_distance
+
 def finalAnswer(all_permutations):
     distance = []
     for permutation in all_permutations:
