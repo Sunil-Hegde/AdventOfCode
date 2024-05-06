@@ -1,31 +1,72 @@
-lights = [[0]*1000 for i in range(1000)]
-with open('instructions.txt') as f:
-	s = f.read()
+def processData(input_file):
+    rawData = []    
+    with open(input_file, 'r') as file:
+        for line in file:
+            x = line.split()
+            if x[0] == "turn":
+                x.pop(3)
+                x[0] = x[0] + x[1]  
+                x.pop(1) 
+            else:
+                x.pop(2)
+            rawData.append(x)
+                  
+    return rawData
 
-def prepare(l):
-	if 'on' in l:
-		f = lambda x: 1    #1+x
-		l = l.replace('turn on ', '')
-	elif 'off' in l:
-		f = lambda x: 0    #max(x-1, 0)
-		l = l.replace('turn off ', '')
-	elif 'toggle' in l:
-		f = lambda x: x+1%2    #x + 2
-		l = l.replace('toggle ', '')
-	return l, f
+def lightsFunctionPartOne(lights, instructions):
+    for i in instructions:
+        x = i[1].split(',')
+        y = i[-1].split(',')
+        if i[0] == "turnon":
+            for m in range(int(x[0]), int(y[0])+1):
+                for n in range(int(x[1]), int(y[1])+1):
+                    lights[m][n] = 1
+        elif i[0] == "turnoff":
+            for m in range(int(x[0]), int(y[0])+1):
+                for n in range(int(x[1]), int(y[1])+1):
+                    lights[m][n] = 0
+        elif i[0] == "toggle":
+            for m in range(int(x[0]), int(y[0])+1):
+                for n in range(int(x[1]), int(y[1])+1):
+                    if lights[m][n] == 0:
+                        lights[m][n] = 1
+                    elif lights[m][n] == 1:
+                        lights[m][n] = 0
+    count = 0
+    for i in lights:
+        for j in i:
+            if j == 1:
+                count+=1
+    return count
 
-def dorange(lights, start, end, fn):
-	for i in range(start[0], end[0] + 1):
-		for j in range(start[1], end[1] + 1):
-			lights[i][j] = fn(lights[i][j])
+def lightsFunctionPartTwo(lights, instructions):
+    for i, instr in enumerate(instructions):
+        x = instr[1].split(',')
+        y = instr[-1].split(',')
+        if instr[0] == "turnon":
+            for m in range(int(x[0]), int(y[0])+1):
+                for n in range(int(x[1]), int(y[1])+1):
+                    lights[m][n] += 1
+        elif instr[0] == "turnoff":
+            for m in range(int(x[0]), int(y[0])+1):
+                for n in range(int(x[1]), int(y[1])+1):
+                    if lights[m][n] > 0:
+                        lights[m][n] -= 1
+        elif instr[0] == "toggle":
+            for m in range(int(x[0]), int(y[0])+1):
+                for n in range(int(x[1]), int(y[1])+1):
+                    lights[m][n] += 2
+    total_brightness = sum(sum(row) for row in lights)
+    return total_brightness
 
-def day6(lights, instr):
-	for l in instr:
-		f = None
-		l, f = prepare(l)
-		l = l.split(' through ')
-		start = [i for i in map(int, l[0].split(','))]
-		end = [i for i in map(int, l[1].split(','))]
-		dorange(lights, start, end, f)
 
-print(sum(map(sum, l)))
+            
+input_file = "/home/sunil/Desktop/repos/AoC/2015/day6/instructions.txt"
+lights = [[0] * 1000 for i in range(1000)]
+instructions = processData(input_file)
+partOne = lightsFunctionPartOne(lights, instructions)
+print("Part One: " + str(partOne))
+partTwo = lightsFunctionPartTwo(lights, instructions)
+print("Part Two: " + str(partTwo))
+
+
