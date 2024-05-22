@@ -1,29 +1,49 @@
-def find_min_house_with_presents(target_presents):
-    limit = target_presents // 10
-    house_presents = [0] * (limit + 1)
+import math
 
-    for elf in range(1, limit + 1):
-        for house in range(elf, limit + 1, elf):
-            house_presents[house] += elf * 10
+def giftsCalculatorPartOne(number):
+    sum = 0
+    sqrt_num = int(math.sqrt(number))
+    for i in range(1, sqrt_num + 1):
+        if number % i == 0:
+            sum += i * 10
+            if i != number // i:  
+                sum += (number // i) * 10
+    return sum
 
-    for house, presents in enumerate(house_presents):
-        if presents >= target_presents:
-            return house
+def giftsCalculatorPartTwo(number, elves):
+    sum = 0
+    sqrt_num = int(math.sqrt(number))
+    for i in range(1, sqrt_num + 1):
+        if number % i == 0:
+            if elves[i] < 50:
+                sum += i * 11
+                elves[i] += 1
+            if i != number // i and elves[number // i] < 50:
+                sum += (number // i) * 11
+                elves[number // i] += 1
+    return sum
 
-def find_min_house_with_presents_v2(target_presents):
-    limit = target_presents // 11
-    house_presents = [0] * (limit + 1)
+def findHousePartOne(target_gifts):
+    houseNumber = 1
+    while True:
+        giftsPerHouse = giftsCalculatorPartOne(houseNumber)
+        #print(f"Gifts for house {houseNumber} is {giftsPerHouse}")
+        if giftsPerHouse >= target_gifts:
+            break
+        houseNumber += 1
+    return houseNumber
 
-    for elf in range(1, limit + 1):
-        for house in range(elf, min(elf * 50 + 1, limit + 1), elf):
-            house_presents[house] += elf * 11
+def findHousePartTwo(target_gifts):
+    houseNumber = 1
+    elves = [0] * (target_gifts + 1) 
+    while True:
+        giftsPerHouse = giftsCalculatorPartTwo(houseNumber, elves)
+        #print(f"Gifts for house {houseNumber} is {giftsPerHouse}")
+        if giftsPerHouse >= target_gifts:
+            break
+        houseNumber += 1
+    return houseNumber
 
-    for house, presents in enumerate(house_presents):
-        if presents >= target_presents:
-            return house
-
-target_presents = 36000000
-min_house_part_one = find_min_house_with_presents(target_presents)
-print("Part One: " + str(min_house_part_one))
-min_house_part_two = find_min_house_with_presents_v2(target_presents)
-print("Part Two: " + str(min_house_part_two))
+number = 36000000
+print(f"Part One: {findHousePartOne(number)}")
+print(f"Part Two: {findHousePartTwo(number)}")
