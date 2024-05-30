@@ -10,7 +10,7 @@ Your puzzle answer: `19980801`.
 
 Finally its done!
 
-![Proof Image](../idk\nRequired_stuff?/2015done.png)
+![Proof Image](https://github.com/Sunil-Hegde/AdventOfCode/blob/main/2015/idk%5CnRequired_stuff%3F/2015done.png?raw=true)
 
 ******************
 
