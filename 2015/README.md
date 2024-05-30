@@ -34,14 +34,14 @@ Oh, and for my fellow techies out there, here's a peek under the hood:
 
 And here's the lit Advent calendar showing the proof of completion:
 
-![Lit Advent Calendar](/home/sunil/Desktop/repos/AoC/2015/idk\nRequired_stuff?/yayyFullyLitAdventCalender.png)
+![Lit Advent Calendar](https://github.com/Sunil-Hegde/AdventOfCode/blob/main/2015/idk%5CnRequired_stuff%3F/yayyFullyLitAdventCalender.png?raw=true)
 
 ## Shell Script Adventures
 
 Oh, and let me tell you about these two shell scripts:
 
-1. [createDir.sh](/path/to/create_folders.sh) - This thing helped me create 25 folders for each day's challenge. Talk about efficiency!
-2. [addReadme.sh](/path/to/add_readme.sh) - Ah, the lifesaver! After realizing I forgot to add README.md files to each folder, this script came to the rescue. Phew!
+1. [createDir.sh](https://github.com/Sunil-Hegde/AdventOfCode/blob/main/2015/idk%5CnRequired_stuff%3F/addReadme.sh) - This thing helped me create 25 folders for each day's challenge. Talk about efficiency!
+2. [addReadme.sh](https://github.com/Sunil-Hegde/AdventOfCode/blob/main/2015/idk%5CnRequired_stuff%3F/createDir.sh) - Ah, the lifesaver! After realizing I forgot to add README.md files to each folder, this script came to the rescue. Phew!
 
 ---
 2016, you are next. 😎🚀
