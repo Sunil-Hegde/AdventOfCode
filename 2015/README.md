@@ -45,5 +45,3 @@ Oh, and let me tell you about these two shell scripts:
 
 ---
 2016, you are next. 😎🚀
-
-Hope this covers all the bases! Let me know if you need any more tweaks.
